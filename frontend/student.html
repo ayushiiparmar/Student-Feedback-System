@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a56">
+  <title>Student Dashboard | SR University</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="student">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="student.html">
+        <span class="brand-mark">SR</span>
+        <span><strong>SR University</strong><small>Feedback portal</small></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Student navigation">
+        <a class="nav-link active" href="#overview" data-student-view="overview"><span class="nav-icon">⌂</span>Overview</a>
+        <a class="nav-link" href="#my-courses" data-student-view="courses"><span class="nav-icon">▤</span>My courses</a>
+        <a class="nav-link" href="#feedback-history" data-student-view="history"><span class="nav-icon">◷</span>Feedback history</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-help"><span class="help-icon">?</span><strong>Need help?</strong><p>Reach out to your department office for portal support.</p></div>
+        <button class="nav-link logout-button" type="button" data-logout><span class="nav-icon">↪</span>Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu-button" type="button" data-menu-toggle aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Student portal</span><span class="breadcrumb-separator">/</span><strong id="student-breadcrumb">Overview</strong></div>
+        <div class="topbar-actions"><span class="term-pill">Fall semester · 2026</span><div class="profile-menu-wrap"><button class="profile-chip" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-menu" data-role-menu-toggle><span class="avatar avatar-blue" data-profile-initials>SR</span><span><strong data-profile-name>Student</strong><small>Student</small></span><span class="chevron">⌄</span></button><div class="profile-menu" id="profile-menu" role="menu" aria-label="Demo role switcher" hidden><span class="profile-menu-label">SWITCH DEMO ROLE</span><button type="button" role="menuitem" data-switch-role="student" aria-current="true">Student <span>Current</span></button><button type="button" role="menuitem" data-switch-role="faculty">Faculty</button><button type="button" role="menuitem" data-switch-role="admin">Admin</button></div></div></div>
+      </header>
+
+      <div class="page-content">
+        <section class="page-heading" id="student-heading">
+          <div><span class="eyebrow" data-current-date></span><h1>Good morning, <span data-student-first-name>Student</span> <span class="wave">✦</span></h1><p>Here’s what’s happening with your courses this semester.</p></div>
+          <a class="button button-secondary" href="#my-courses" data-student-view="courses">View my courses <span aria-hidden="true">→</span></a>
+        </section>
+
+        <section class="stats-grid student-stats" aria-label="Student overview">
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-lilac">▤</span><span class="stat-trend">This semester</span></div><strong class="stat-number" id="student-course-count">—</strong><span class="stat-label">Enrolled courses</span><div class="stat-foot" id="student-department-count">Loading course data…</div></article>
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-blue">✓</span><span class="stat-trend">Keep it up</span></div><strong class="stat-number" id="completed-count">— <span class="stat-denominator">/ —</span></strong><span class="stat-label">Feedback submitted</span><div class="stat-foot">Your voice makes a difference</div></article>
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-amber">◷</span><span class="stat-trend trend-warm">Loading status</span></div><strong class="stat-number" id="pending-count">—</strong><span class="stat-label">Awaiting your feedback</span><div class="stat-foot">It only takes a few minutes</div></article>
+        </section>
+
+        <section class="content-grid student-profile-grid">
+          <article class="panel profile-summary">
+            <div class="panel-heading"><div><h2>Your profile</h2><p>A quick look at your student details</p></div><button class="icon-button" type="button" aria-label="More profile details" aria-expanded="false" aria-controls="student-profile-extra" data-profile-details-toggle>···</button></div>
+            <div class="profile-identity"><span class="avatar avatar-large avatar-blue" data-profile-initials>SR</span><div><h3 data-profile-name>Student</h3><span class="status-text"><span class="status-dot"></span>Active student</span></div></div>
+            <div class="profile-details"><div><span>Account ID</span><strong data-student-id>—</strong></div><div><span>Department</span><strong data-student-program>—</strong></div><div><span>Semester</span><strong data-student-year>—</strong></div><div><span>Department</span><strong data-student-department>—</strong></div><div id="student-profile-extra" hidden><span>University email</span><strong data-student-email></strong></div></div>
+          </article>
+          <article class="panel encouragement-panel">
+            <div class="encouragement-art" aria-hidden="true"><span>✦</span><span>✧</span><span>✦</span></div>
+            <span class="eyebrow">YOUR FEEDBACK MATTERS</span><h2>Help us make every class count.</h2><p>Thoughtful feedback helps faculty understand what’s working and where they can make learning even better.</p>
+            <a href="#my-courses" class="button button-white" data-student-view="courses">Share your feedback <span>→</span></a>
+          </article>
+        </section>
+
+        <section class="panel courses-panel" id="student-courses">
+          <div class="panel-heading"><div><h2 id="courses-title">Your courses</h2><p id="courses-subtitle">Feedback status for your enrolled courses</p></div><span class="count-pill">Fall 2026</span></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>COURSE</th><th>FACULTY</th><th>DEPARTMENT</th><th>STATUS</th><th>ACTION</th></tr></thead>
+              <tbody id="student-course-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel student-history-panel" id="student-history" hidden>
+          <div class="panel-heading"><div><h2>Feedback history</h2><p>Your submitted feedback is private and cannot be changed.</p></div></div>
+          <div id="student-history-list" class="history-list"></div>
+        </section>
+        <footer class="page-footer"><span>© 2026 SR University</span><span>Student Feedback &amp; Evaluation System <span class="footer-divider">·</span> Prototype</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="feedback-modal" hidden>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
+      <div class="modal-heading"><div><span class="eyebrow">COURSE EVALUATION</span><h2 id="feedback-title">Share your feedback</h2><p id="feedback-course-name" class="muted"></p></div><button type="button" class="icon-button" data-close-feedback aria-label="Close feedback form">×</button></div>
+      <form id="feedback-form">
+        <div id="rating-fields" class="rating-fields"></div>
+        <label for="feedback-comment">Additional comments <span class="optional-label">Optional</span></label>
+        <textarea id="feedback-comment" rows="3" maxlength="500" placeholder="What’s going well? What could make this course even better?"></textarea>
+        <p class="privacy-note"><span>◉</span> Faculty do not receive your account details. Avoid including identifying information in comments.</p>
+        <div id="feedback-message" class="form-message" role="status" aria-live="polite"></div>
+        <div class="modal-actions"><button type="button" class="button button-quiet" data-close-feedback>Cancel</button><button type="submit" class="button button-primary">Submit feedback <span>→</span></button></div>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+</body>
+</html>

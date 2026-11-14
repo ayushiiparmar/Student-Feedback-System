@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a56">
+  <title>Admin Dashboard | SR University</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="admin">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="admin.html"><span class="brand-mark">SR</span><span><strong>SR University</strong><small>Feedback portal</small></span></a>
+      <div class="sidebar-label">ADMINISTRATION</div>
+      <nav class="side-nav" aria-label="Admin navigation">
+        <a class="nav-link active" href="#dashboard" data-admin-view="dashboard"><span class="nav-icon">⌂</span>Dashboard</a>
+        <div class="nav-group-label">MANAGE</div>
+        <a class="nav-link" href="#students" data-admin-view="students"><span class="nav-icon">♙</span>Students</a>
+        <a class="nav-link" href="#faculty" data-admin-view="faculty"><span class="nav-icon">♧</span>Faculty</a>
+        <a class="nav-link" href="#courses" data-admin-view="courses"><span class="nav-icon">▤</span>Courses</a>
+        <a class="nav-link" href="#assignments" data-admin-view="assignments"><span class="nav-icon">⇄</span>Course assignments</a>
+        <div class="nav-group-label">INSIGHTS</div>
+        <a class="nav-link" href="#reports" data-admin-view="reports"><span class="nav-icon">▥</span>Reports &amp; analytics</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-help"><span class="help-icon">?</span><strong>Admin support</strong><p>Need assistance? Contact the IT services desk.</p></div><button class="nav-link logout-button" type="button" data-logout><span class="nav-icon">↪</span>Sign out</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu-button" type="button" data-menu-toggle aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Administration</span><span class="breadcrumb-separator">/</span><strong id="admin-breadcrumb">Dashboard</strong></div>
+        <div class="topbar-actions"><span class="term-pill">Fall semester · 2026</span><div class="profile-menu-wrap"><button class="profile-chip" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-menu" data-role-menu-toggle><span class="avatar avatar-violet" data-profile-initials>RS</span><span><strong data-profile-name>Riya Sharma</strong><small>Administrator</small></span><span class="chevron">⌄</span></button><div class="profile-menu" id="profile-menu" role="menu" aria-label="Demo role switcher" hidden><span class="profile-menu-label">SWITCH DEMO ROLE</span><button type="button" role="menuitem" data-switch-role="student">Student</button><button type="button" role="menuitem" data-switch-role="faculty">Faculty</button><button type="button" role="menuitem" data-switch-role="admin" aria-current="true">Admin <span>Current</span></button></div></div></div>
+      </header>
+      <div class="page-content">
+        <section class="admin-view active" data-admin-section="dashboard">
+          <section class="page-heading"><div><span class="eyebrow">UNIVERSITY OVERVIEW · FALL 2026</span><h1>Good morning, Riya</h1><p>Monitor feedback, track teaching quality, and manage your academic community.</p></div><button class="button button-primary" type="button" data-admin-export>↓ Export report</button></section>
+          <section class="stats-grid admin-stats" aria-label="University overview">
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-blue">♙</span><span class="stat-trend">Live database</span></div><strong class="stat-number" id="admin-student-count">0</strong><span class="stat-label">Total students</span><div class="stat-foot" id="admin-department-count">Across 0 departments</div></article>
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-lilac">♧</span><span class="stat-trend">Live database</span></div><strong class="stat-number" id="admin-faculty-count">0</strong><span class="stat-label">Total faculty</span><div class="stat-foot">Active teaching faculty</div></article>
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-amber">▤</span><span class="stat-trend">Current semester</span></div><strong class="stat-number" id="admin-course-count">0</strong><span class="stat-label">Active courses</span><div class="stat-foot">Courses in the database</div></article>
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-green">✓</span><span class="stat-trend" id="admin-participation">Current evaluation</span></div><strong class="stat-number" id="admin-feedback-count">0</strong><span class="stat-label">Feedback submissions</span><div class="stat-foot">Stored by the backend</div></article>
+          </section>
+          <section class="content-grid admin-chart-grid">
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>Average by parameter</h2><p>University-wide student ratings</p></div><span class="count-pill">Out of 5</span></div><div class="chart-container"><canvas id="admin-parameter-chart" aria-label="Bar chart showing average feedback by parameter"></canvas></div></article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>Department performance</h2><p>Average rating by department</p></div><span class="count-pill">Fall 2026</span></div><div class="chart-container"><canvas id="admin-department-chart" aria-label="Bar chart showing department performance"></canvas></div></article>
+          </section>
+          <section class="content-grid admin-lower-grid">
+            <article class="panel"><div class="panel-heading"><div><h2>Top faculty this semester</h2><p>Based on average student feedback</p></div><button class="text-button" type="button" data-admin-view-button="reports">View analytics →</button></div><div id="top-faculty-list" class="ranking-list"></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>Course performance</h2><p>Average rating by selected courses</p></div><span class="count-pill">Top courses</span></div><div class="chart-container chart-short"><canvas id="admin-course-chart" aria-label="Bar chart showing course-wise average ratings"></canvas></div></article>
+          </section>
+        </section>
+
+        <section class="admin-view" data-admin-section="students" hidden>
+          <section class="page-heading"><div><span class="eyebrow">ACADEMIC COMMUNITY</span><h1>Manage students</h1><p>View the student directory and course enrollment overview.</p></div><button class="button button-primary" type="button" data-add-record="student">＋ Add student</button></section>
+          <section class="panel management-panel"><div class="management-toolbar"><div class="search-field"><span>⌕</span><input type="search" placeholder="Search students..." aria-label="Search students" data-table-search="students"></div><span class="count-pill" id="students-count-pill">Students</span></div><div class="table-wrap"><table class="data-table" id="students-table"><thead><tr><th>STUDENT</th><th>ACCOUNT ID</th><th>DEPARTMENT</th><th>SEMESTER</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="students-rows">
+            <tr class="empty-table-message"><td colspan="6"><div class="empty-state"><strong>Loading student records</strong><p>Fetching current data from the backend API.</p></div></td></tr>
+          </tbody></table></div><div class="table-caption">Directory data loaded from the backend API.</div></section>
+        </section>
+
+        <section class="admin-view" data-admin-section="faculty" hidden>
+          <section class="page-heading"><div><span class="eyebrow">ACADEMIC COMMUNITY</span><h1>Manage faculty</h1><p>Review faculty directory and teaching assignments.</p></div><button class="button button-primary" type="button" data-add-record="faculty">＋ Add faculty</button></section>
+          <section class="panel management-panel"><div class="management-toolbar"><div class="search-field"><span>⌕</span><input type="search" placeholder="Search faculty..." aria-label="Search faculty" data-table-search="faculty"></div><span class="count-pill" id="faculty-count-pill">Faculty</span></div><div class="table-wrap"><table class="data-table" id="faculty-table"><thead><tr><th>FACULTY</th><th>ACCOUNT ID</th><th>DEPARTMENT</th><th>COURSES</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="faculty-rows">
+            <tr class="empty-table-message"><td colspan="6"><div class="empty-state"><strong>Loading faculty records</strong><p>Fetching current data from the backend API.</p></div></td></tr>
+          </tbody></table></div><div class="table-caption">Directory data loaded from the backend API.</div></section>
+        </section>
+
+        <section class="admin-view" data-admin-section="courses" hidden>
+          <section class="page-heading"><div><span class="eyebrow">ACADEMIC CATALOG</span><h1>Manage courses</h1><p>Browse courses included in current semester evaluations.</p></div><button class="button button-primary" type="button" data-add-record="course">＋ Add course</button></section>
+          <section class="panel management-panel"><div class="management-toolbar"><div class="search-field"><span>⌕</span><input type="search" placeholder="Search courses..." aria-label="Search courses" data-table-search="courses"></div><span class="count-pill" id="courses-count-pill">Courses</span></div><div class="table-wrap"><table class="data-table" id="courses-table"><thead><tr><th>COURSE</th><th>COURSE CODE</th><th>DEPARTMENT</th><th>FACULTY</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="courses-rows">
+            <tr class="empty-table-message"><td colspan="6"><div class="empty-state"><strong>Loading courses</strong><p>Fetching current data from the backend API.</p></div></td></tr>
+          </tbody></table></div><div class="table-caption">Course data loaded from the backend API.</div></section>
+        </section>
+
+        <section class="admin-view" data-admin-section="assignments" hidden>
+          <section class="page-heading"><div><span class="eyebrow">TEACHING &amp; ENROLLMENT</span><h1>Course assignments</h1><p>Review faculty teaching assignments and student course enrollment.</p></div></section>
+          <section class="content-grid assignment-grid">
+            <article class="panel assignment-card"><div class="panel-heading"><div><h2>Assign faculty to courses</h2><p>Create a teaching assignment for the semester.</p></div><span class="stat-icon icon-lilac">♧</span></div>
+              <form class="assignment-form" data-assignment-form="faculty"><label for="assignment-faculty">Faculty member</label><select id="assignment-faculty" required><option value="">Select faculty member</option></select><label for="assignment-faculty-course">Course</label><select id="assignment-faculty-course" required><option value="">Select course</option></select><button class="button button-primary" type="submit">＋ Assign faculty</button><div class="form-message" role="status"></div></form>
+            </article>
+            <article class="panel assignment-card"><div class="panel-heading"><div><h2>Enroll students in courses</h2><p>Add a student to a course evaluation roster.</p></div><span class="stat-icon icon-blue">♙</span></div>
+              <form class="assignment-form" data-assignment-form="student"><label for="assignment-student">Student</label><select id="assignment-student" required><option value="">Select student</option></select><label for="assignment-student-course">Course</label><select id="assignment-student-course" required><option value="">Select course</option></select><button class="button button-primary" type="submit">＋ Enroll student</button><div class="form-message" role="status"></div></form>
+            </article>
+          </section>
+          <section class="panel"><div class="panel-heading"><div><h2>Current assignments</h2><p>Faculty teaching and student enrollment mappings</p></div></div><div class="table-wrap"><table class="data-table"><thead><tr><th>COURSE</th><th>INSTRUCTOR</th><th>ENROLLED STUDENTS</th><th>TERM</th></tr></thead><tbody id="assignment-rows"></tbody></table></div></section>
+        </section>
+
+        <section class="admin-view" data-admin-section="reports" hidden>
+          <section class="page-heading"><div><span class="eyebrow">INSTITUTIONAL INSIGHTS</span><h1>Reports &amp; analytics</h1><p>Explore student feedback results across departments and courses.</p></div><button class="button button-primary" type="button" data-admin-export>↓ Export report</button></section>
+          <section class="stats-grid report-stats">
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-green">★</span><span class="stat-trend">All departments</span></div><strong class="stat-number" id="admin-overall-average">—<span class="stat-denominator"> / 5</span></strong><span class="stat-label">Overall department average</span><div class="stat-foot" id="admin-overall-caption">No feedback yet</div></article>
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-blue">✓</span><span class="stat-trend">Current term</span></div><strong class="stat-number" id="admin-feedback-participation">0%</strong><span class="stat-label">Feedback participation</span><div class="stat-foot" id="admin-participation-count">0 submissions</div></article>
+            <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-amber">◷</span><span class="stat-trend" id="admin-highest-department">Department</span></div><strong class="stat-number" id="admin-highest-average">—</strong><span class="stat-label">Highest department average</span><div class="stat-foot" id="admin-highest-name">No ratings yet</div></article>
+          </section>
+          <section class="content-grid report-chart-grid"><article class="panel chart-panel"><div class="panel-heading"><div><h2>Average feedback by parameter</h2><p>University-wide rating breakdown</p></div><span class="count-pill">Out of 5</span></div><div class="chart-container chart-tall"><canvas id="report-parameter-chart" aria-label="Average feedback by parameter"></canvas></div></article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>Department-wise performance</h2><p>Average rating across departments</p></div></div><div class="chart-container chart-tall"><canvas id="report-department-chart" aria-label="Department-wise performance"></canvas></div></article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>Course-wise average ratings</h2><p>Selected courses this semester</p></div></div><div class="chart-container chart-tall"><canvas id="report-course-chart" aria-label="Course-wise average ratings"></canvas></div></article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><h2>Feedback rating distribution</h2><p>Count of each score across all five parameters</p></div><span class="count-pill">Scores 1–5</span></div><div class="chart-container chart-tall"><canvas id="report-rating-distribution-chart" aria-label="Chart showing feedback rating counts from one to five"></canvas></div></article>
+            <article class="panel"><div class="panel-heading"><div><h2>Top 5 faculty by score</h2><p>Based on average student feedback</p></div></div><div id="report-faculty-list" class="ranking-list"></div></article>
+          </section>
+          <div class="notice-box"><span>ⓘ</span><p>Analytics are calculated from backend feedback records. Faculty endpoints are scoped to assigned courses and omit student records.</p></div>
+        </section>
+        <footer class="page-footer"><span>© 2026 SR University</span><span>Student Feedback &amp; Evaluation System <span class="footer-divider">·</span> Prototype</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="record-modal" hidden>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="record-title">
+      <div class="modal-heading"><div><span class="eyebrow">DATABASE MANAGEMENT</span><h2 id="record-title">Add record</h2><p class="muted">Changes are saved through the backend API.</p></div><button type="button" class="icon-button" data-close-record aria-label="Close form">×</button></div>
+      <form id="record-form"><div id="record-fields" class="record-fields"></div><div id="record-message" class="form-message" role="status" aria-live="polite"></div><div class="modal-actions"><button type="button" class="button button-quiet" data-close-record>Cancel</button><button type="submit" class="button button-primary">Save record</button></div></form>
+    </section>
+  </div>
+  <div class="toast" id="admin-toast" role="status" aria-live="polite"></div>
+</body>
+</html>

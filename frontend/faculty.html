@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a56">
+  <title>Faculty Dashboard | SR University</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body data-page="faculty">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="faculty.html"><span class="brand-mark">SR</span><span><strong>SR University</strong><small>Feedback portal</small></span></a>
+      <div class="sidebar-label">FACULTY WORKSPACE</div>
+      <nav class="side-nav" aria-label="Faculty navigation">
+        <a class="nav-link active" href="#faculty-overview" data-faculty-view="overview"><span class="nav-icon">⌂</span>Overview</a>
+        <a class="nav-link" href="#faculty-courses" data-faculty-view="courses"><span class="nav-icon">▤</span>My courses</a>
+        <a class="nav-link" href="#faculty-comments" data-faculty-view="comments"><span class="nav-icon">◷</span>Student comments</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-help"><span class="help-icon">?</span><strong>Faculty support</strong><p>Questions about your evaluations? Contact Academic Affairs.</p></div><button class="nav-link logout-button" type="button" data-logout><span class="nav-icon">↪</span>Sign out</button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu-button" type="button" data-menu-toggle aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Faculty portal</span><span class="breadcrumb-separator">/</span><strong id="faculty-breadcrumb">Overview</strong></div>
+        <div class="topbar-actions"><span class="term-pill">Fall semester · 2026</span><div class="profile-menu-wrap"><button class="profile-chip" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-menu" data-role-menu-toggle><span class="avatar avatar-green" data-profile-initials>PM</span><span><strong data-profile-name>Dr. Priya Menon</strong><small>Faculty</small></span><span class="chevron">⌄</span></button><div class="profile-menu" id="profile-menu" role="menu" aria-label="Demo role switcher" hidden><span class="profile-menu-label">SWITCH DEMO ROLE</span><button type="button" role="menuitem" data-switch-role="student">Student</button><button type="button" role="menuitem" data-switch-role="faculty" aria-current="true">Faculty <span>Current</span></button><button type="button" role="menuitem" data-switch-role="admin">Admin</button></div></div></div>
+      </header>
+      <div class="page-content">
+        <section class="page-heading" id="faculty-overview">
+          <div><span class="eyebrow">FACULTY INSIGHTS · FALL 2026</span><h1>Welcome back, <span data-faculty-heading>Dr. Menon</span></h1><p>Here’s how students are experiencing your courses this semester.</p></div>
+          <button class="button button-secondary" type="button" data-faculty-export>↓ Export summary</button>
+        </section>
+        <section class="stats-grid" aria-label="Faculty feedback summary">
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-blue">◉</span><span class="stat-trend">Across your courses</span></div><strong class="stat-number" id="faculty-total-feedback">0</strong><span class="stat-label">Feedback responses</span><div class="stat-foot">Anonymous responses only</div></article>
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-amber">★</span><span class="stat-trend trend-good">Course feedback</span></div><strong class="stat-number" id="faculty-average-rating">—<span class="stat-denominator"> / 5</span></strong><span class="stat-label">Average rating</span><div class="stat-foot" id="faculty-rating-caption">No feedback yet</div></article>
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-lilac">▤</span><span class="stat-trend">Fall semester</span></div><strong class="stat-number" id="faculty-course-count">0</strong><span class="stat-label">Assigned courses</span><div class="stat-foot" id="faculty-program-count">No courses assigned</div></article>
+          <article class="stat-card"><div class="stat-card-top"><span class="stat-icon icon-amber">↗</span><span class="stat-trend">Participation</span></div><strong class="stat-number" id="faculty-response-rate">—</strong><span class="stat-label">Response rate</span><div class="stat-foot">Based on enrolled students</div></article>
+        </section>
+        <section class="content-grid faculty-analytics-grid">
+          <article class="panel chart-panel"><div class="panel-heading"><div><h2>Rating by category</h2><p>Average student rating across all your courses</p></div><span class="count-pill">Out of 5</span></div><div class="chart-container chart-tall"><canvas id="faculty-category-chart" aria-label="Bar chart showing ratings by category"></canvas></div><div id="faculty-category-summary" class="category-summary"></div></article>
+          <article class="panel trend-panel"><div class="panel-heading"><div><h2>Feedback trends</h2><p>Responses received this semester</p></div></div><div class="trend-highlight"><span class="trend-highlight-icon">↗</span><div><strong id="faculty-trend-summary">Loading feedback activity</strong><span id="faculty-trend-detail">Trend details are calculated from submitted feedback.</span></div></div><div class="chart-container"><canvas id="faculty-trend-chart" aria-label="Line chart showing feedback trends"></canvas></div></article>
+        </section>
+        <section class="panel" id="faculty-courses">
+          <div class="panel-heading"><div><h2>Your courses</h2><p>Course-level evaluation summary</p></div></div>
+          <div class="table-wrap"><table class="data-table"><thead><tr><th>COURSE</th><th>PROGRAM</th><th>RESPONSES</th><th>AVERAGE RATING</th><th>STATUS</th></tr></thead>
+            <tbody id="faculty-course-rows"></tbody>
+          </table></div>
+        </section>
+        <section class="panel comments-panel" id="faculty-comments">
+          <div class="panel-heading"><div><h2>What students are saying</h2><p>Anonymous comments from your course feedback</p></div><span class="privacy-tag">◉ Anonymous</span></div>
+          <div class="comments-grid" id="faculty-comment-list"></div>
+          <p class="privacy-note"><span>◉</span> Comments appear only when a course has at least five responses and five comments. Individual dates and ratings are omitted; registered identities and common contact patterns are redacted. This is a safeguard, not a guarantee of anonymity.</p>
+        </section>
+        <footer class="page-footer"><span>© 2026 SR University</span><span>Student Feedback &amp; Evaluation System <span class="footer-divider">·</span> Prototype</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="app-toast" role="status" aria-live="polite"></div>
+</body>
+</html>

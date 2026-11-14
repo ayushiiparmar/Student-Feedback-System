@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a56">
+  <title>Sign in | SR University Feedback &amp; Evaluation</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body class="login-page">
+  <main class="login-layout">
+    <section class="login-brand-panel">
+      <a class="brand brand-light" href="index.html" aria-label="SR University home">
+        <span class="brand-mark">SR</span>
+        <span><strong>SR University</strong><small>Learning. Leadership. Legacy.</small></span>
+      </a>
+      <div class="brand-message">
+        <span class="eyebrow">A better learning experience starts here</span>
+        <h1>Every voice helps us grow.</h1>
+        <p>Share meaningful feedback, celebrate great teaching, and help shape the future of learning at SR University.</p>
+        <div class="brand-stat-row">
+          <div><strong>25+</strong><span>academic programs</span></div>
+          <div><strong>One</strong><span>community that listens</span></div>
+        </div>
+      </div>
+      <div class="brand-decoration decoration-one"></div>
+      <div class="brand-decoration decoration-two"></div>
+      <p class="brand-footer">A connected campus. A stronger tomorrow.</p>
+    </section>
+
+    <section class="login-content">
+      <div class="login-card">
+        <div class="mobile-brand brand">
+          <span class="brand-mark">SR</span>
+          <span><strong>SR University</strong><small>Learning. Leadership. Legacy.</small></span>
+        </div>
+        <span class="eyebrow">WELCOME TO YOUR CAMPUS PORTAL</span>
+        <h2 id="login-heading">Sign in to your account</h2>
+        <p class="muted">Use your university account to continue.</p>
+
+        <form id="login-form" class="form-stack">
+          <label for="login-email">University email</label>
+          <input id="login-email" name="email" type="email" placeholder="you@sru.edu.in" autocomplete="username" required>
+          <label for="login-password">Password</label>
+          <div class="password-field">
+            <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required>
+            <button type="button" class="password-toggle" aria-label="Show password" data-password-toggle>Show</button>
+          </div>
+          <label for="login-role">Sign in as</label>
+          <select id="login-role" name="role">
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="admin">Admin</option>
+          </select>
+          <div id="login-message" class="form-message" role="status" aria-live="polite"></div>
+          <button type="submit" class="button button-primary button-wide">Sign in <span aria-hidden="true">→</span></button>
+        </form>
+
+        <div class="demo-box">
+          <div class="demo-box-heading"><span class="demo-dot"></span><strong>Explore the prototype</strong></div>
+          <p>Use a local demo account, or register a student account. Data is served by the configured API.</p>
+          <div class="demo-accounts">
+            <button type="button" data-demo-role="student">Student demo</button>
+            <button type="button" data-demo-role="faculty">Faculty demo</button>
+            <button type="button" data-demo-role="admin">Admin demo</button>
+          </div>
+          <span class="demo-note">Development demo only — not production authentication.</span>
+        </div>
+        <p class="signup-line">New student? <button type="button" class="text-button" id="register-toggle" aria-expanded="false" aria-controls="register-panel">Create an account</button></p>
+        <form id="register-panel" class="register-panel register-form" hidden>
+          <strong>Create your student account</strong>
+          <p>Creates an account in the local development database. Do not use a real password.</p>
+          <label for="register-name">Full name</label>
+          <input id="register-name" name="name" type="text" autocomplete="name" required>
+          <label for="register-email">University email</label>
+          <input id="register-email" name="email" type="email" placeholder="you@sru.edu.in" autocomplete="email" required>
+          <label for="register-program">Program</label>
+          <select id="register-program" name="program" required>
+            <option value="">Select your program</option>
+            <option>B.Tech · Computer Science</option>
+            <option>B.Tech · Electronics</option>
+            <option>B.Tech · Information Technology</option>
+            <option>B.Tech · Mechanical Engineering</option>
+            <option>MBA · Business Administration</option>
+          </select>
+          <label for="register-semester">Semester</label>
+          <select id="register-semester" name="semester" required>
+            <option value="">Select semester</option>
+            <option>Fall 2026</option><option>Spring 2027</option>
+          </select>
+          <label for="register-password">Password</label>
+          <input id="register-password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+          <label for="register-confirm-password">Confirm password</label>
+          <input id="register-confirm-password" name="confirmPassword" type="password" minlength="8" autocomplete="new-password" required>
+          <div id="register-message" class="form-message" role="status" aria-live="polite"></div>
+          <button type="submit" class="button button-primary button-wide">Create student account <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-legal">By continuing, you agree to use this portal responsibly.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
